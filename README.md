@@ -1,16 +1,14 @@
 # Hi-C Workflow
 
-Snakemake workflow for quality control (QC) and processing of Hi-C sequencing data. The pipeline produces a `.cool` file and TAD calls for the processed data. All commands used for QC and data processing are contained within the main `Snakefile`.
-
-This workflow follows the Hi-C processing steps established by Jake in the Carbone Lab (2024).
+Snakemake workflow for QC and processing of HiC data. Results in .cool, .mcool, .hic files and TAD calls for the data. All commands used to QC, and process hic-data are contained in the main Snakefile. This Snakemake workflow was streamlined and expanded by Jimi Rosenkrantz in 2025, following workflow established by Jake in Carbone lab in 2023.
 
 ---
 
 ## Requirements
 
 This workflow requires:
-- **Snakemake** (for workflow automation)
-- **Conda** (for environment management)
+•	**Conda** (for environment management)
+•	**Snakemake** and **git** (for workflow download and automation)
 
 ---
 
@@ -21,21 +19,55 @@ If you haven’t installed Conda and Snakemake, follow these steps:
 1. **Install Conda**  
    Follow the instructions at [Miniconda installation](https://docs.conda.io/en/latest/miniconda.html).
 
-2. **Install Snakemake**:
+2. **Install Snakemake and git**:
    ```bash
-   conda create -n snakemake_env -c conda-forge -c bioconda snakemake
+   mamba create -n snakemake_env -c conda-forge -c bioconda -c defaults snakemake git
    ```
-
+   
 3. **Activate the Snakemake environment**:  
    ```bash
    conda activate snakemake_env
    ```
+4. **Download/clone the Hi-C workflow git repository**:
+   ```bash
+   git clone https://github.com/JLRosenkrantz/snakemake-hic.git
+   ```  
 
 ---
 
 ## Input Data Requirements
 
 ### 1. Raw Data
+Create a new directory to store raw data:
+   ```bash
+   mkdir -p data/raw
+   ```
+
+Place raw Hi-C sequencing reads (fastq.gz) in new directory:
+
+If you have write access to the raw data files, create symbolic links to avoid duplication:
+
+ln -s /path/to/raw-data/*.fastq.gz data/raw/
+
+If you do not have write access, copy the files instead:
+cp /path/to/raw-data/*.fastq.gz data/raw/
+
+Ensure that all files are gzip-compressed (`.fastq.gz`). The workflow will error if uncompressed (`.fastq`) files are used.
+
+File/Sample Naming Convention:
+•	Files must be named using the following format: `Sample1_1.fastq.gz`, `Sample1_2.fastq.gz`
+o	`_1` → Read 1 of paired-end sequencing
+o	`_2` → Read 2 of paired-end sequencing
+•	Incorrect names will cause the workflow to fail.
+•	Manually rename files if needed before running the workflow.
+
+![image](https://github.com/user-attachments/assets/cacb3833-8315-457e-888e-4cadce6ae12d)
+
+
+
+
+
+
 Hi-C raw sequencing reads should be placed in a designated directory:
 
 ```bash
@@ -57,6 +89,15 @@ Ensure that all files are **gzip-compressed** (`.fastq.gz`). The workflow will e
 Manually rename files to desired sampleID plus _1 (for forward read) and _2 (for reverse read). For example:
 rhesus_HiC_test_1.fastq.gz
 rhesus_HiC_test_2.fastq.gz
+
+
+
+
+
+
+
+
+
 
 ---
 
