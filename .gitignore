@@ -1,0 +1,4 @@
+.snakemake/
+*_snakemake.out
+data/raw/*
+results/

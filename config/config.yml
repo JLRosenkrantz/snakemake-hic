@@ -1,0 +1,27 @@
+# SAMPLES:
+#     - "S1_HiC_GD153_43239_oldKit_rep1"
+#     - "S2_HiC_GD110_43234_oldKit_rep1"
+#     - "S3_HiC_GD153_43239_newKit_rep1"
+#     - "S4_HiC_GD110_43234_newKit_rep1"
+#     - "S5_HiC_GD153_43239_oldKit_rep2"
+#     - "S6_HiC_GD110_43234_oldKit_rep2"
+#     - "S7_HiC_GD153_43239_newKit_rep2"
+#     - "S8_HiC_GD110_43234_newKit_rep2"
+
+# path to bowtie2 index. Everything before ".1.bt2"
+GENOME:
+    - "/home/groups/hoolock2/u0/genomes/ucsc/rheMac10/indexes/bowtie2/rheMac10"
+
+
+# digest file make with the following command: 
+# hicup_digester --arima genome.fa 
+DIGEST:
+    - "/home/groups/hoolock2/u0/genomes/ucsc/rheMac10/hicup-digest/Digest_rheMac10_DpnII_Arima_None_08-47-56_19-01-2020.txt"
+
+
+CHRSIZES:
+    - "/home/groups/hoolock2/u0/genomes/ucsc/rheMac10/rheMac10.chrom.sizes"
+
+
+ASMBLY:
+    - "rheMac10"
