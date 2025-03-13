@@ -28,6 +28,7 @@ If you haven’t installed Conda and Snakemake, follow these steps:
    ```bash
    conda activate snakemake_env
    ```
+   
 4. **Download/clone the Hi-C workflow git repository**:
    ```bash
    git clone https://github.com/JLRosenkrantz/snakemake-hic.git
@@ -45,63 +46,29 @@ Create a new directory to store raw data:
 
 Place raw Hi-C sequencing reads (fastq.gz) in new directory:
 
-If you have write access to the raw data files, create symbolic links to avoid duplication:
+   If you have **write access** to the raw data files, create symbolic links to avoid duplication:
+   ```bash
+   ln -s /path/to/raw-data/*.fastq.gz data/raw/
+   ```
 
-ln -s /path/to/raw-data/*.fastq.gz data/raw/
-
-If you do not have write access, copy the files instead:
-cp /path/to/raw-data/*.fastq.gz data/raw/
+   If you **do not have write access**, copy the files instead:
+   ```bash
+   cp /path/to/raw-data/*.fastq.gz data/raw/
+   ```
 
 Ensure that all files are gzip-compressed (`.fastq.gz`). The workflow will error if uncompressed (`.fastq`) files are used.
 
-File/Sample Naming Convention:
-•	Files must be named using the following format: `Sample1_1.fastq.gz`, `Sample1_2.fastq.gz`
-o	`_1` → Read 1 of paired-end sequencing
-o	`_2` → Read 2 of paired-end sequencing
-•	Incorrect names will cause the workflow to fail.
-•	Manually rename files if needed before running the workflow.
+### 2. File/Sample Naming Convention:
+Files must be named using the following format: 
+`Sample1_R1.fastq.gz`, `Sample1_R2.fastq.gz`
+   - `_R1` → Read 1 of paired-end sequencing
+   - `_R2` → Read 2 of paired-end sequencing
 
-![image](https://github.com/user-attachments/assets/cacb3833-8315-457e-888e-4cadce6ae12d)
-
-
-
-
-
-
-Hi-C raw sequencing reads should be placed in a designated directory:
-
-```bash
-mkdir -p data/raw
-```
-
-If you have **write access** to the raw data files, create symbolic links to avoid duplication:
-```bash
-ln -s /path/to/raw-data/*.fastq.gz data/raw/
-```
-
-If you **do not have write access**, copy the files instead:
-```bash
-cp /path/to/raw-data/*.fastq.gz data/raw/
-```
-
-Ensure that all files are **gzip-compressed** (`.fastq.gz`). The workflow will error if uncompressed (`.fastq`) files are used.
-
-Manually rename files to desired sampleID plus _1 (for forward read) and _2 (for reverse read). For example:
-rhesus_HiC_test_1.fastq.gz
-rhesus_HiC_test_2.fastq.gz
-
-
-
-
-
-
-
-
-
+Incorrect names will cause the workflow to fail. Manually rename files if needed before running the workflow.
 
 ---
 
-### 2. File names and sample names
+
 
 
 
