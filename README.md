@@ -89,11 +89,20 @@ hicup_digester --arima --genome Human_hg38 --outdir hicup-digest/ *.fa &
 #### CHRSIZES:
 Path to chromosome size file. Can be downloaded from UCSC genome browser or other sources. 
 
-## Execution:
+---
 
+## Execution:
+Run the following command from the main directory to execute **practice dry run**:
+```bash
+snakemake --use-conda -np
 ```
+
+Run the following command from the main directory to **execute snakemake workflow**:
+```bash
 snakemake --use-conda -j20 > $(date +"%y%m%d%H%M%S")_snakemake.out 2>&1
 ```
+
+---
 
 ## Runtime:
 The hicup pipeline is the most resource intensive step that can be expected to run for at least 24 hours for a sample with a sequencing depth of 500 million reads and 8 threads.
