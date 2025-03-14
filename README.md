@@ -45,18 +45,18 @@ If you haven’t installed Conda and Snakemake, follow these steps:
    ```
 
 #### Place raw Hi-C sequencing reads (fastq.gz) in new directory:
-If you have **write access** to the raw data files, create symbolic links to avoid duplication:
-```bash
-ln -s /path/to/raw-data/*.fastq.gz data/raw/
-```
+- If you have **write access** to the raw data files, create symbolic links to avoid duplication:
+   ```bash
+   ln -s /path/to/raw-data/*.fastq.gz data/raw/
+   ```
 
-If you **do not have write access**, copy the files instead:
-```bash
-cp /path/to/raw-data/*.fastq.gz data/raw/
-```
+- If you **do not have write access**, copy the files instead:
+   ```bash
+   cp /path/to/raw-data/*.fastq.gz data/raw/
+   ```
 
 #### Ensure that all files are gzip-compressed (`.fastq.gz`).
-The workflow will error if uncompressed (`.fastq`) or incorrecly named (.fa.gz) files are used.
+The workflow will error if uncompressed (`.fastq`) or incorrecly named (`.fa.gz`) files are used.
 
 ### 2. File/Sample Naming Convention:
 Files must be named using the following format: 
@@ -107,7 +107,44 @@ snakemake --use-conda -j20 > $(date +"%y%m%d%H%M%S")_snakemake.out 2>&1
 ## Runtime:
 The hicup pipeline is the most resource intensive step that can be expected to run for at least 24 hours for a sample with a sequencing depth of 500 million reads and 8 threads.
 
+---
 
+## Results:
+Once the workflow completes, the following output files will be generated:
+
+### 1. Quality Control Reports
+- **FastQC Reports**: `results/fastqc/{sample}_fastqc.html`
+- **MultiQC Summary**: `results/fastqc/multiqc_report.html`
+   - Aggregates FastQC results for an overview of sequencing quality.
+
+### 2. Processed Hi-C Data
+- **Aligned Reads (BAM format)**:
+   - `results/hicup/{sample}/{sample}_R1_2.hicup.bam`
+   - Deduplicated and mapped Hi-C read pairs.
+
+- **Contact Matrices**:
+   - `.cool` file: `results/cool/{sample}.cool`
+   - `.mcool` file: `results/cool/{sample}.mcool`
+   - `.hic` file (for Juicebox visualization): `results/hic/{sample}.hic`
+
+### 3. TAD and Chromatin Structure Analysis
+- **TAD calls**:
+   - `results/tads/{sample}_tads.bed`
+- **Hi-C interaction maps**:
+   - `.mcool` files can be loaded into **HiGlass** for visualization.
+
+---
+
+## Visualization
+To visualize Hi-C contact matrices:
+
+Juicebox:
+bash
+Copy
+Edit
+java -jar juicer_tools.jar pre results/cool/{sample}.cool results/hic/{sample}.hic
+HiGlass:
+Use .mcool files for interactive genome contact visualization.
 
 
 
