@@ -138,12 +138,10 @@ Once the workflow completes, the following output files will be generated:
 ## Visualization
 To visualize Hi-C contact matrices:
 
-Juicebox:
-bash
-Copy
-Edit
-java -jar juicer_tools.jar pre results/cool/{sample}.cool results/hic/{sample}.hic
-HiGlass:
+- **Juicebox**:
+Use `.hic` files
+
+- **HiGlass**:
 Use .mcool files for interactive genome contact visualization.
 
 
