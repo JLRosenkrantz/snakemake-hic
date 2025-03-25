@@ -54,6 +54,7 @@ rule fastqc:
 rule multiqc_raw:
     input:
        expand("results/fastqc/{read}_fastqc.zip", read=reads),
+       directory("results/fastqc/multiqc_data"),
     output:
         "results/fastqc/multiqc_report.html"
     log:
@@ -161,7 +162,7 @@ rule pairs2hic:
         "results/logs/pairs2hic.{sample}.log"
     threads: 16
     shell:        
-        "java -Xmx16G -jar scripts/juicer_tools_1.22.01.jar pre --threads 16 {input} {output} {params.chrsize} >{log} 2>&1"
+        "java -Xmx64G -jar scripts/juicer_tools_1.22.01.jar pre --threads 16 {input} {output} {params.chrsize} >{log} 2>&1"
 
 
 
