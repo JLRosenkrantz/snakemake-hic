@@ -16,5 +16,4 @@ CHRSIZES:
 ASMBLY:
     - "rheMac10"
     
-threads: 10
 

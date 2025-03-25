@@ -99,7 +99,7 @@ snakemake --use-conda -np
 
 Run the following command from the main directory to **execute snakemake workflow**:
 ```bash
-snakemake --use-conda -j20 > $(date +"%y%m%d%H%M%S")_snakemake.out 2>&1
+snakemake --use-conda -j32 > $(date +"%y%m%d%H%M%S")_snakemake.out 2>&1
 ```
 
 ---
